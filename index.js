@@ -5,9 +5,17 @@ import controller  from './lib/controller/song'
 const app = express()
 const port = 8080
 
+app.use(express.json())
+app.use(express.urlencoded({ extended: true })) 
+
 app.get('/songs', async (req, res) => {
-  const songs = await controller.getAllSongs(req)
-  res.status(200).json(songs)
+  const response = await controller.getAllSongs(req)
+  res.status(200).json(response)
+})
+
+app.post('/songs', (req, res) => {
+  const response = controller.createSong(req)
+  res.status(200).json(response)
 })
 
 app.listen(port, () => {

@@ -31,6 +31,16 @@ app.post('/playlists', (req, res) => {
   res.status(200).json(response)
 })
 
+app.get('/playlists/:id', async (req, res) => {
+  const response = await controller.playlist.getPlaylistById(req)
+  res.status(200).json(response)
+})
+
+app.post('/playlists/:id/songs/:id_song', async (req, res) => {
+  const response = await controller.playlist.addSongToPlaylist(req)
+  res.status(200).json(response)
+})
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
